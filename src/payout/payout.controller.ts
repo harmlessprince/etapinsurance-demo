@@ -3,6 +3,7 @@ import { UserService } from '../user/user.service';
 import { sendSuccessResponse } from '../core/utils';
 import { PayoutService } from './payout.service';
 import { RequestPayoutDto } from './request-payout.dto';
+import { PayoutRequest } from './payout-requests.model';
 
 @Controller('payout')
 export class PayoutController {
@@ -17,7 +18,8 @@ export class PayoutController {
     if (!agent) {
       throw new NotFoundException('Agent not found');
     }
-    const result = await this.payoutService.requestPayout(requestPayoutDto);
-    return sendSuccessResponse({ ...result }, 'Request Submitted');
+    const payoutRequest: PayoutRequest =
+      await this.payoutService.requestPayout(requestPayoutDto);
+    return sendSuccessResponse(payoutRequest.get(), 'Request Submitted');
   }
 }
