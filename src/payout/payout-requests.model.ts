@@ -21,8 +21,10 @@ export class PayoutRequest extends Model {
   @Column({ field: 'agent_id' })
   declare agentId: string;
 
-  @Column declare amount: number;
-  @Column declare status: string;
+  @Column
+  declare amount: number;
+  @Column
+  declare status: string;
 
   @Column({
     field: 'created_at',
@@ -34,8 +36,12 @@ export class PayoutRequest extends Model {
   })
   declare updatedAt?: Date;
 
-  @Column({ field: 'requested_at' }) requestedAt: Date;
-  @Column({ field: 'reviewed_at' }) reviewedAt: Date;
+  @Column({ field: 'requested_at' })
+  declare requestedAt: Date;
 
-  @BelongsTo(() => User) agent: User;
+  @Column({ field: 'reviewed_at' })
+  declare reviewedAt: Date;
+
+  @BelongsTo(() => User)
+  agent: User;
 }

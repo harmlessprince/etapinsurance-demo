@@ -16,7 +16,7 @@ export class PayoutService {
     private sequelize: Sequelize,
   ) {}
 
-  async requestPayout(data: RequestPayoutDto) {
+  async requestPayout(data: RequestPayoutDto): Promise<PayoutRequest> {
     // Calculate total available commission
     const result = await this.sequelize.query<CommissionBalance>(
       `

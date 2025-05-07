@@ -1,99 +1,82 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# InsuranceTech API
+Welcome to a Simple Insurance API – a backend service that helps manage agents, insurance policies, commissions, and payout requests. It models the critical workflow from policy sales by agents to commission earnings and payout management.
+## Overview
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+The API provides the following functionalities:
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+1. Tracks insurance policies sold by agents.
+2. Calculates commissions earned by agents based on policies.
+3. Provides a breakdown of earnings by policy type.
+4. Allows agents to request payouts based on available commissions.
+5. Supports filtering of policies by type for easy reporting.
 
-## Description
+## Key Features
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+1. Policy Management: Agents can sell third-party or comprehensive insurance policies.
+2. Commission Tracking: Commissions are automatically associated with policies.
+3. Earnings Breakdown: View total earnings, earnings from the last 30 days, and categorized breakdown by policy type.
+4. Payout Requests: Agents can request payouts for their commissions, which deducts from the available balance.
+5. Database-Level Aggregation: Calculations such as total earned, recent earnings, and policy breakdowns are done using raw SQL for performance.
+6. Model Relationships: Establish strong relationships between users, policies, commissions, and vehicles.
 
-## Project setup
+## API Endpoints
 
-```bash
-$ npm install
-```
+https://documenter.getpostman.com/view/11352884/2sB2j7dV8n
 
-## Compile and run the project
+## Getting Started
 
-```bash
-# development
-$ npm run start
+### Requirements
+1. Node.js version 22 and above
+2. PostgresSQL database
 
-# watch mode
-$ npm run start:dev
 
-# production mode
-$ npm run start:prod
-```
+### Installation
 
-## Run tests
+1. clone the repository
+2. install dependencies (yarn install or npm install)
+   ```
+   # using npm
+   npm install
+   
+   # using yarn
+   yarn install
+   ```
+3. configure database and environment
+    ```
+    # create .env file at the root of your project
+    # update .env file with database credentials like below
+    DB_USERNAME=*****
+    DB_PASSWORD=*****
+    DB_DATABASE=etapinsurance
+    DB_HOST=localhost
+    DB_PORT=5432
+    PORT=3000
+    NODE_ENV=development
+   ```
+4. Run migration and seeders (yarn run db:fresh or npm run db:fresh)
+    ```
+   yarn run db:fresh 
+   OR
+   npm run db:fresh
+   ```
+5. Start server (yarn run start or npm run start)
+    ```
+    yarn run start
+   OR
+    npm run start
+   ```
+6. Run test (yarn run test or npm run test)
+    ```
+    yarn run test
+    OR
+    npm run test
+    ```
 
-```bash
-# unit tests
-$ npm run test
+## Database Schema
 
-# e2e tests
-$ npm run test:e2e
+![schemainsurance.png](schemainsurance.png)
 
-# test coverage
-$ npm run test:cov
-```
 
-## Deployment
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
-# etapinsurance-demo
