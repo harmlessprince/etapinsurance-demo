@@ -57,7 +57,8 @@ export class PolicyController {
 
     return sendSuccessResponse(
       {
-        policyId: policy.policyNumber,
+        policyNumber: policy.policyNumber,
+        policyId: policy.id,
         premium: policy.premium,
         startDate: policy.startDate,
         endDate: policy.endDate,
