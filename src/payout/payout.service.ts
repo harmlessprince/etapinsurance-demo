@@ -8,6 +8,13 @@ import { RequestPayoutDto } from './request-payout.dto';
 import { CommissionBalance } from './commission-balance.interface';
 import { QueryTypes } from 'sequelize';
 
+/**
+ * Service responsible for handling agent payout requests.
+ *
+ * Capabilities:
+ * - Calculate available commissions for an agent.
+ * - Validate and submit payout requests.
+ */
 @Injectable()
 export class PayoutService {
   constructor(
@@ -16,6 +23,19 @@ export class PayoutService {
     private sequelize: Sequelize,
   ) {}
 
+  /**
+   * Processes a payout request for an agent.
+   *
+   * This method:
+   * - Calculates the total available commission for the agent by subtracting
+   *   the sum of pending/approved payout requests from the total earned commissions.
+   * - Throws an error if the requested amount exceeds the available balance.
+   * - Creates a new payout request with a default `pending` status if valid.
+   *
+   * @param data - The payload containing agentId and requested amount.
+   * @returns The newly created `PayoutRequest` record.
+   * @throws BadRequestException if the requested amount exceeds the available balance.
+   */
   async requestPayout(data: RequestPayoutDto): Promise<PayoutRequest> {
     // Calculate total available commission
     const result = await this.sequelize.query<CommissionBalance>(

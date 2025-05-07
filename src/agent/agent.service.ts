@@ -4,6 +4,13 @@ import { QueryTypes } from 'sequelize';
 import { InjectConnection } from '@nestjs/sequelize';
 import { AgentEarningsResult } from './agent-earnings-result';
 
+/**
+ * Service responsible for managing agent-related operations.
+ *
+ * Capabilities:
+ * - Retrieves detailed earnings breakdown for an agent, including total earnings,
+ *   earnings over the last 30 days, and commissions based on different policy types.
+ */
 @Injectable()
 export class AgentService {
   constructor(
@@ -11,6 +18,23 @@ export class AgentService {
     private readonly sequelize: Sequelize,
   ) {}
 
+  /**
+   * Retrieves the earnings breakdown for a specific agent.
+   *
+   * This method computes the total earnings for an agent, earnings in the last 30 days,
+   * the number of policies sold, and a detailed commission breakdown based on policy types.
+   *
+   * It returns a structured response including:
+   * - Total earnings for the agent
+   * - Earnings in the last 30 days
+   * - Number of policies sold
+   * - Breakdown of earnings for both third-party and comprehensive policies
+   *
+   * @param agentId - The unique identifier of the agent whose earnings are being queried.
+   * @returns A promise resolving to an object containing the agent's earnings details.
+   *          The object includes total earnings, earnings from the last 30 days,
+   *          the count of policies sold, and a breakdown of third-party and comprehensive commissions.
+   */
   async getAgentEarningsBreakdown(agentId: string) {
     const [result] = await this.sequelize.query<AgentEarningsResult>(
       `
